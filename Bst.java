@@ -20,6 +20,7 @@ class Node implements Comparable<Node> {
 
 public class Bst {
 	public Node head;
+	int size;
 
     public Bst(){
         head=null;
@@ -65,6 +66,11 @@ public class Bst {
 			prev.RightNode=curr;
     }
 
+	public int size(){
+		System.out.println("Size: " + size);
+		return size;
+	}
+
 	public void printTree() {
         if (head == null) {
             System.out.println("Tree is empty.");
@@ -73,6 +79,7 @@ public class Bst {
 
         Queue<Node> queue = new LinkedList<>();
         queue.add(head);
+		size=1;	
 
         while (!queue.isEmpty()) {
             int nodesAtCurrentLevel = queue.size();
@@ -82,11 +89,14 @@ public class Bst {
                 assert node != null;
                 System.out.print(node.data + " ");
 
-                if (node.LeftNode != null)
-                    queue.add(node.LeftNode);
+                if (node.LeftNode != null){
+                    size++;
+					queue.add(node.LeftNode);
+				}
 
-                if (node.RightNode != null)
-                    queue.add(node.RightNode);
+                if (node.RightNode != null){
+					size++;
+                    queue.add(node.RightNode);}
 
                 nodesAtCurrentLevel--;
             }
@@ -97,10 +107,25 @@ public class Bst {
 
 	public static void main(String[] args) {
 
-        // UC1: create bst with 56 and then 30 and 70
+        // UC1: Create bst with 56 and then 30 and 70
         Bst tree = new Bst(56);
         tree.add(30);
         tree.add(70);
         tree.printTree();
+		tree.size();
+
+		// UC2: Create tree and return size
+		tree.add(22);
+        tree.add(40);
+        tree.add(60);
+        tree.add(95);
+        tree.add(11);
+        tree.add(65);
+        tree.add(3);
+        tree.add(16);
+        tree.add(63);
+        tree.add(67);
+        tree.printTree();
+		tree.size();
 	}
 }
