@@ -71,6 +71,25 @@ public class Bst {
 		return size;
 	}
 
+	public boolean search(int data) {
+        Node current = head;
+
+        while (current != null) {
+            if (current.data == data){
+				System.out.println(data + " is present.");
+                return true;
+			}
+
+            if (data < current.data)
+                current = current.LeftNode;
+            else
+                current = current.RightNode;
+        }
+		
+		System.out.println(data + " is present.");
+        return false;
+    }
+
 	public void printTree() {
         if (head == null) {
             System.out.println("Tree is empty.");
@@ -127,5 +146,8 @@ public class Bst {
         tree.add(67);
         tree.printTree();
 		tree.size();
+
+		// UC3: Search for a node in the BST
+		tree.search(63);
 	}
 }
